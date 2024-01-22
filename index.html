@@ -437,7 +437,7 @@
                     <section class="py-5 wow fadeInUp" data-wow-delay="0.1s" id="contact">
                         <h2 class="title pb-3 mb-5">Contact Me</h2>
 						<p class="mb-4">Feel free to contact me!</p>
-                        <form>
+                        <form onsubmit="sendEmail(); reset(); return false;">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
@@ -492,11 +492,34 @@
         <script src="lib/isotope/isotope.pkgd.min.js"></script>
         <script src="lib/lightbox/js/lightbox.min.js"></script>
 
-        <!-- Contact Javascript File -->
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
-
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+
+        <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+        <script type="text/javascript">
+                
+                function sendEmail(){
+                    let name=document.getElementById('name').value;
+                    let email=document.getElementById('email').value;
+                    let subject=document.getElementById('subject').value;
+                    let msg=document.getElementById('message').value;
+                     
+
+                    let bodyOfEmail="Name: "+name+"<br/>"+"Email: "+email+"<br/> Query: "+msg;
+
+                    Email.send({
+                        SecureToken : "9032f892-af5b-4afd-a130-6114eb22c355",
+                        To : 'testingsoftwares10@gmail.com',
+                        From : "testingsoftwares10@gmail.com",
+                        Subject : subject,
+                        Body : bodyOfEmail
+                    }).then(
+                      message => alert(message)
+                    );
+                }
+
+        </script>
+
     </body>
 </html>
